@@ -1,0 +1,99 @@
+#  Uma função computador_escolhe_jogada que recebe, como parâmetros, os números
+# n e m descritos acima e devolve um inteiro correspondente à próxima jogada do 
+# computador (ou seja, quantas peças o computador deve retirar do tabuleiro) de 
+# acordo com a estratégia vencedora.
+
+def computador_escolhe_jogada(n,m):
+    jogada = m
+    jogada_ok = False
+    while jogada_ok == False:
+        pecas_rest = n - jogada
+        if pecas_rest % (m + 1) !=0:
+            return jogada
+            jogada_ok = True
+        else:
+            jogada -+ 1
+
+computador_escolhe_jogada(10,2)
+
+
+#   Uma função usuario_escolhe_jogada que recebe os mesmos parâmetros, solicita
+# que o jogador informe sua jogada e verifica se o valor informado é válido. Se 
+# o valor informado for válido, a função deve devolvê-lo; caso contrário, deve 
+# solicitar novamente ao usuário que informe uma jogada válida.
+
+def usuario_escolhe_jogada(n, m):
+    jog_U_inval = True
+    print("Entre com o número de peças que deseja retirar, entre 1 e", m, "peça(s).")
+    while jog_U_inval:
+        jogada_U = float(input("Peças:"))
+        if jogada_U % 1 != 0: #jog_U_inval = True
+            print("Valor deve ser inteiro!")
+        else:
+            if jogada_U > m: #jog_U_inval = True
+                print("Valor deve ser menor ou igual a", m,"!!")
+            else:
+                if jogada_U == 0: #jog_U_inval = True
+                    print("Você é obrigado a tirar pelo menos uma peça!!")
+                else:
+                    if jogada_U < 0: #jog_U_inval = True
+                        print("Digite um número inteiro positivo!!")
+                    else:
+                        jog_U_inval = False
+                        jogada_U = int(jogada_U)
+    return jogada_U
+
+usuario_escolhe_jogada(10,2)
+
+
+#   Uma função partida que não recebe nenhum parâmetro, solicita ao usuário que informe
+# os valores de n e m e inicia o jogo, alternando entre jogadas do computador e do usuário 
+# (ou seja, chamadas às duas funções anteriores). A escolha da jogada inicial deve ser 
+# feita em função da estratégia vencedora, como dito anteriormente. A cada jogada, 
+# deve ser impresso na tela o estado atual do jogo, ou seja, quantas peças foram removidas 
+# na última jogada e quantas restam na mesa. Quando a última peça é removida, essa função 
+# imprime na tela a mensagem "O computador ganhou!" ou "Você ganhou!" conforme o caso.
+
+print("Seja bem vindo ao jogo de NIM!!!!")
+print("-----------------------------------------")
+print("Esse jogo se inicia com 'n' peças inicialmente dispostas numa mesa ou tabuleiro.")
+print("Dois jogadores jogam  alternadamente, retirando pelo menos 1 e no máximo 'm' peças cada um.")
+print("Quem tirar as últimas peças possíveis ganha o jogo.")
+print("-----------------------------------------")
+
+n = input("Entre com o número de peças iniciais do jogo. N: ")
+m = input("Agora com o número máx de peças a serem retiradas por jogada. M: ")
+
+
+
+QuemJoga = computador_decide(n, m)
+
+def computador_decide(nn, mm):
+    resto = nn % (mm+1)
+    if resto != 0:
+        print("Você começa!")
+        return "Usuário"
+    else:
+        print("Computador começa!")
+        return "Computador"
+
+
+def valida(x,m):
+    jog_U_inval = True
+    while jog_U_inval:
+        jogada_U = x #float(input("Peças:"))
+        if x % 1 != 0: #jog_U_inval = True
+            print("Valor deve ser inteiro!")
+        else:
+            if jogada_U > m: #jog_U_inval = True
+                print("Valor deve ser menor ou igual a", m,"!!")
+            else:
+                if jogada_U == 0: #jog_U_inval = True
+                    print("Você é obrigado a tirar pelo menos uma peça!!")
+                else:
+                    if jogada_U < 0: #jog_U_inval = True
+                        print("Digite um número inteiro positivo!!")
+                    else:
+                        jog_U_inval = False
+                        jogada_U = int(jogada_U)
+valida(2,2)
